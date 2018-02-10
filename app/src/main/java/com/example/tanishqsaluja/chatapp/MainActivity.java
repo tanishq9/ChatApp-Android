@@ -2,13 +2,18 @@ package com.example.tanishqsaluja.chatapp;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TableLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.PagerAdapter;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,16 +25,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewPager viewPager=findViewById(R.id.viewPager);
-        TableLayout tableLayout=findViewById(R.id.tabLayout);
-        //viewPager.setAdapter();
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
         mybar = findViewById(R.id.mytoolbar);
         setSupportActionBar(mybar);
-        getSupportActionBar().setTitle("Chat");
+        getSupportActionBar().setTitle("ChatApp");
+
+
+        ViewPager viewPager=findViewById(R.id.viewPager);
+        TabLayout tabLayout=findViewById(R.id.tabLayout);
+        MyFragmentClass myFragmentClass=new MyFragmentClass(getSupportFragmentManager());
+        viewPager.setAdapter(myFragmentClass);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override
@@ -62,7 +70,46 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
         }
+        else if(item.getItemId()==R.id.accountsettings){
+            Intent settingIntent=new Intent(MainActivity.this,SettingsActivity.class);
+            startActivity(settingIntent);
+        }
         return true;
+    }
+
+    class MyFragmentClass extends FragmentPagerAdapter {
+        public MyFragmentClass(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position){
+                case 0: return "Requests";
+                case 1: return "Chats";
+                case 2: return "Friends";
+            }
+            return "Null";
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if(position==0){
+                return new FragmentRequests();
+            }
+            else if(position==1){
+                return new FragmentChats();
+            }
+            else if(position==2){
+                return new FragmentFriends();
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
     }
 }
 

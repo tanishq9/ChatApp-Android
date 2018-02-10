@@ -19,6 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 /**
  * Created by tanishqsaluja on 10/2/18.
@@ -30,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     android.support.v7.widget.Toolbar mybar;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailaddress=email.getText().toString();
+                final String emailaddress=email.getText().toString();
                 String pass=password.getText().toString();
-                String name=displayName.getText().toString();
+                final String name=displayName.getText().toString();
                 if(TextUtils.isEmpty(emailaddress) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(name)){
                     Toast.makeText(RegisterActivity.this,"Invalid Details",Toast.LENGTH_SHORT).show();
                 }
@@ -67,10 +73,30 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 progressDialog.dismiss();
-                                Log.e("TEST", "LOGGING IN");
+                                FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+                                DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
+                                HashMap<String,String> hashMap=new HashMap();
+                                hashMap.put("name",name);
+                                hashMap.put("status","");
+                                hashMap.put("email",emailaddress);
+                                hashMap.put("photo","");
+                                hashMap.put("thumbnail","");
+                                //adding complete listener when the item is successfuly added
+                                //to the realtime database
+                                databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+
+
+                                /*Log.e("TEST", "LOGGING IN");
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                finish();
+                                finish();*/
                             }
                             else{
                                 progressDialog.dismiss();
