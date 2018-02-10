@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "946176249980",
+    "firebase_url": "https://chatapp-137b7.firebaseio.com",
+    "project_id": "chatapp-137b7",
+    "storage_bucket": "chatapp-137b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946176249980:android:23831dc92a96bf6c",
+        "android_client_info": {
+          "package_name": "com.example.tanishqsaluja.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946176249980-7v49ofhi3p5selfb8mploh8gs9ceqfo5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tanishqsaluja.chatapp",
+            "certificate_hash": "affb34350843be32d09b1ce3e6305346ba50f002"
+          }
+        },
+        {
+          "client_id": "946176249980-pi6mq06okngar6vmkvtgs28osc0tgatv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJyN54VSBEdcySsHIgHOpshzk8xCNX0u0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946176249980-pi6mq06okngar6vmkvtgs28osc0tgatv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
