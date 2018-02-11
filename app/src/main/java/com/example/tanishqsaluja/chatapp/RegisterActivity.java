@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
                                 HashMap<String,String> hashMap=new HashMap();
                                 hashMap.put("name",name);
-                                hashMap.put("status","");
+                                hashMap.put("status","Hello There ! I am using ChatApp");
                                 hashMap.put("email",emailaddress);
                                 hashMap.put("photo","");
                                 hashMap.put("thumbnail","");

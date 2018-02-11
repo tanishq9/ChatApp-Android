@@ -27,6 +27,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent=new Intent(StartActivity.this,RegisterActivity.class);
                 startActivity(registerIntent);
+                finish();
             }
         });
         signin=findViewById(R.id.signin);
@@ -35,7 +36,10 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent signinIntent=new Intent(StartActivity.this,SigninActivity.class);
                 startActivity(signinIntent);
+                finish();
             }
+
+
         });
     }
 
