@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ChatApp</string>
+    <string name="app_name">GupShup</string>
     <string name="title_activity_my_status">MyStatusActivity</string>
 </resources>
