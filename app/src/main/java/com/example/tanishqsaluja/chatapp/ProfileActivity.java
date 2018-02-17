@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.hasChild(uid)) {
                                         current_state = "friends";
-                                        send.setText("Unfriend " + getIntent().getStringExtra("uidname"));
+                                        send.setText("Unfriend ");// + getIntent().getStringExtra("uidname"));
                                     }
 
                                 }
@@ -174,10 +174,10 @@ public class ProfileActivity extends AppCompatActivity {
                 else if (current_state.equals("req_received")) {
                     final String current_date = DateFormat.getDateTimeInstance().format(new Date());
                     friendList = FirebaseDatabase.getInstance().getReference().child("Friend_List");
-                    friendList.child(currentUser.getUid()).child(uid).setValue(current_date).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    friendList.child(currentUser.getUid()).child(uid).child("date").setValue(current_date).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            friendList.child(uid).child(currentUser.getUid())
+                            friendList.child(uid).child(currentUser.getUid()).child("date")
                                     .setValue(current_date).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

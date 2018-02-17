@@ -79,7 +79,11 @@ public class SettingsActivity extends AppCompatActivity {
                 displayName.setText(name);
                 displayEmail.setText(email);
                 displayStatus.setText(status);
-                Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.bot).into(circleImageView);
+                try {
+                    Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.bot).into(circleImageView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 //circleImageView.setImageResource();
             }
 

@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 hashMap.put("name",name);
                                 hashMap.put("status","Hello There ! I am using ChatApp");
                                 hashMap.put("email",emailaddress);
-                                hashMap.put("photo","");
+                                hashMap.put("image","");
                                 hashMap.put("thumbnail","");
                                 //adding complete listener when the item is successfuly added
                                 //to the realtime database

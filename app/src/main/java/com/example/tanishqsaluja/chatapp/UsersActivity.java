@@ -51,20 +51,30 @@ public class UsersActivity extends AppCompatActivity {
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(firebaseRecyclerOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull final UserViewHolder holder, int position, @NonNull final User model) {
+            protected void onBindViewHolder(@NonNull final UserViewHolder holder, int position, @NonNull User model) {
                 holder.name.setText(model.getName());
                 Log.e("TEST", model.getName());
                 Log.e("TEST", model.getStatus());
                 holder.status.setText(model.getStatus());
-                // holder.image.setText(model.getImage())
-                Picasso.with(UsersActivity.this).load(model.getImage()).into(holder.circleImageView);
+                //holder.image.setText(model.getImage())
+                try {
+                    Log.e("test","hyea->"+model.getImage());
+                } catch (Exception e) {
+                    Log.e("test","hyea->"+"Error");
+                    e.printStackTrace();
+                }
+                try {
+                    Picasso.with(UsersActivity.this).load(model.getImage()).placeholder(R.drawable.bot).into(holder.circleImageView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 final String uid=getRef(position).getKey();
                 holder.circleImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(UsersActivity.this,ProfileActivity.class);
                         intent.putExtra("uid",uid);
-                        intent.putExtra("uidname",model.getName());
+                        //intent.putExtra("uidname",model.getName());
                         startActivity(intent);
                     }
                 });
