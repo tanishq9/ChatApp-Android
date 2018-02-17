@@ -1,5 +1,6 @@
 package com.example.tanishqsaluja.chatapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,13 +51,23 @@ public class UsersActivity extends AppCompatActivity {
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(firebaseRecyclerOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull User model) {
+            protected void onBindViewHolder(@NonNull final UserViewHolder holder, int position, @NonNull final User model) {
                 holder.name.setText(model.getName());
                 Log.e("TEST", model.getName());
                 Log.e("TEST", model.getStatus());
                 holder.status.setText(model.getStatus());
                 // holder.image.setText(model.getImage())
                 Picasso.with(UsersActivity.this).load(model.getImage()).into(holder.circleImageView);
+                final String uid=getRef(position).getKey();
+                holder.circleImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(UsersActivity.this,ProfileActivity.class);
+                        intent.putExtra("uid",uid);
+                        intent.putExtra("uidname",model.getName());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -87,7 +98,7 @@ public class UsersActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.stopListening();
     }
 
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
+    public class UserViewHolder extends RecyclerView.ViewHolder {
         TextView name, status;
         CircleImageView circleImageView;
         public UserViewHolder(View itemView) {

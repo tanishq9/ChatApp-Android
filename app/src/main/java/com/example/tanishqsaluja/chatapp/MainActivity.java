@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     android.support.v7.widget.Toolbar mybar;
 
+    //To retreive data from Firebase , use valueevent or childevent listener
+    //use these listeners when you know the reference (or the node name)
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

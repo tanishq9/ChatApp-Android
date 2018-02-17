@@ -39,7 +39,7 @@
         <activity
             android:name=".UsersActivity"
             android:parentActivityName=".StartActivity" />
-        <activity android:name=".SendRequestActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
