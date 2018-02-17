@@ -73,7 +73,11 @@ public class ProfileActivity extends AppCompatActivity {
                 String username = dataSnapshot.child("name").getValue(String.class);
                 String userstatus = dataSnapshot.child("status").getValue(String.class);
                 String image = dataSnapshot.child("image").getValue(String.class);
-                Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.bot).into(circleImageView);
+                try {
+                    Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.bot).into(circleImageView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 name.setText(username);
                 status.setText(userstatus);
 

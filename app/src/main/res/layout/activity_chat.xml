@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/darker_gray"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
 
-    <include layout="@layout/app_bar" android:id="@+id/mybar"></include>
+    <include
+        android:id="@+id/mybar"
+        layout="@layout/app_bar"></include>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvmessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="55dp"></android.support.v7.widget.RecyclerView>
 
     <ImageButton
-        android:background="#fff"
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:background="#fff"
         app:srcCompat="@drawable/ic_add_black_24dp"
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
         android:id="@+id/entermessage"
-        android:background="#fff"
-        android:hint="Enter Message..."
         android:layout_width="315dp"
         android:layout_height="50dp"
         android:layout_alignBottom="@+id/add"
-        android:layout_toEndOf="@+id/add" />
+        android:layout_toEndOf="@+id/add"
+        android:background="#fff"
+        android:hint="Enter Message..." />
 
     <ImageButton
-        android:background="#fff"
         android:id="@+id/send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/add"
         android:layout_alignParentEnd="true"
+        android:background="#fff"
         app:srcCompat="@drawable/ic_send_black_24dp"
         tools:ignore="VectorDrawableCompat" />
 

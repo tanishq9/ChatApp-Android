@@ -57,8 +57,10 @@
         android:id="@+id/onlineoroffline"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/username"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_toEndOf="@+id/username"
         app:srcCompat="@drawable/circle" />
 
 

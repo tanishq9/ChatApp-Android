@@ -3,6 +3,8 @@ package com.example.tanishqsaluja.chatapp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Toolbar;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +38,9 @@ public class ChatActivity extends AppCompatActivity {
     String friendUserID, currentUserID;
     ImageButton add, send;
     EditText entermessage;
+    RecyclerView recyclerView;
+    ArrayList<Message> arrayList;
+    MessageAdapter messageAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +53,17 @@ public class ChatActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getIntent().getStringExtra("name"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        recyclerView = findViewById(R.id.rvmessages);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
+        recyclerView.setHasFixedSize(true);
+        arrayList = new ArrayList<>();
+        messageAdapter = new MessageAdapter(arrayList);
+        recyclerView.setAdapter(messageAdapter);
+
         add = findViewById(R.id.add);
         send = findViewById(R.id.send);
         entermessage = findViewById(R.id.entermessage);
+
 
         friendUserID = getIntent().getStringExtra("friend");
         databaseReference = FirebaseDatabase.getInstance().getReference()
@@ -98,6 +113,46 @@ public class ChatActivity extends AppCompatActivity {
                 sendMessage();
             }
         });
+
+        //function to retreive the messages
+
+        loadmessages();
+
+    }
+
+    private void loadmessages() {
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+                .child("messages").child(currentUserID).child(friendUserID);
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Message message = dataSnapshot.getValue(Message.class);
+                arrayList.add(message);
+                messageAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void sendMessage() {
@@ -114,6 +169,7 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("seen", false);
             messageMap.put("time", ServerValue.TIMESTAMP);
             messageMap.put("type", "text");
+            messageMap.put("from", friendUserID);
 
             Map messageUserMap = new HashMap();
             messageUserMap.put(current_user_ref + push_id, messageMap);
@@ -129,6 +185,8 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
         }
+
+        entermessage.setText("");
     }
 }
 
