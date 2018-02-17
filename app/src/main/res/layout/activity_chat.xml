@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/darker_gray"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/app_bar" android:id="@+id/mybar"></include>
+
+    <ImageView
+        android:background="#fff"
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <EditText
+        android:background="#fff"
+        android:text="Enter Message..."
+        android:layout_width="315dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/add"
+        android:layout_toEndOf="@+id/add" />
+
+    <ImageView
+        android:background="#fff"
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/add"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/ic_send_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>

@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.hasChild(uid)) {
                                         current_state = "friends";
-                                        send.setText("Unfriend ");// + getIntent().getStringExtra("uidname"));
+                                        send.setText("Unfriend");// + getIntent().getStringExtra("uidname"));
                                     }
 
                                 }
