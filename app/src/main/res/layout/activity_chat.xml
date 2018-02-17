@@ -8,7 +8,7 @@
 
     <include layout="@layout/app_bar" android:id="@+id/mybar"></include>
 
-    <ImageView
+    <ImageButton
         android:background="#fff"
         android:id="@+id/add"
         android:layout_width="wrap_content"
@@ -19,16 +19,17 @@
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
+        android:id="@+id/entermessage"
         android:background="#fff"
-        android:text="Enter Message..."
+        android:hint="Enter Message..."
         android:layout_width="315dp"
         android:layout_height="50dp"
         android:layout_alignBottom="@+id/add"
         android:layout_toEndOf="@+id/add" />
 
-    <ImageView
+    <ImageButton
         android:background="#fff"
-        android:id="@+id/imageView"
+        android:id="@+id/send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/add"
